@@ -1,0 +1,108 @@
+*start commands{
+    npm start;(live server)
+    *(newTerminal)npx json-server --watch data/db.json --port 8000;(to get the url from the raw data, and watching)
+    *(newTerminal)npm install react-router-dom@6; (to install router-version"num")
+}
+
+*component, 
+    is just a function, which returns a JSX template, and that function is exported in the bottom of the page,
+
+*useState hook,
+    gives us a way to make reactive value, and also provides us the way to change the value whenever we want; 
+    have to import the function from react;
+//import { useState } from "react";
+//const [name, setName] = useState('shanto')
+
+*react Dev tools,
+
+*props,
+    props are a way to pass data from one component(parent) into another component(child);
+    //<BlogList blogs={blogs} title="All Blogs!" />
+    // const blogs = props.blogs;
+    // const title = props.title;
+
+*useEffect Hook,
+    useEffect is a way to run code on every render,
+    use, once initially and thereafter when data changes;
+    it doesn't return anything to us,
+    it can create an infinite loop;
+    //useEffect()
+
+*useEffect dependencies,
+    useeffect dependencies are used to limit the firing of useEffect hook;
+    *empty array will run it in initial render only, or once;
+    //useEffect(() => {},[])
+    *we can use specific value, so that the useEffect will only run when that specific state is changed;
+
+    //const [name, setName] = useState('mario')
+    //useEffect(() => {
+        console.log("useffect hook ran");
+        console.log(name);
+    },[name])
+    //<button onClick={() => setName('luigi')}>Change name</button>
+
+*custom hook,
+    to maintain and expand the reusability of our we use custom hooks in react, 
+    *custom hook's name should start "useName";
+    *create a file, create a component name "useName", then write code,
+    *pass argument and also destructure the returns in context where it's used; 
+
+*react router,
+    router routes pages from one another without sending http request each time;
+    *import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+    *surround the application you want to route with "Router" component,
+    <Router></Router>
+    *"Routes" component make sure that only one route shows at any one time;
+    *surround the individual route you want to route under "route" component;
+    *we need to add a path property to the Route component which is path of the component,
+    <Routes>
+        <Route path="/" element={<Home />}>
+        </Route>
+        <Route path="/create" element={<Create />}>
+        </Route>
+    </Routes>
+
+*router links,
+    prevents browser to http request, instead it looks at route > components, if found any then injects them without rerendering the whole page;
+    much quicker then downloading a new page;
+    *import { Link } from 'react-router-dom';
+
+*useEffect cleanup,
+    react-router-dom-v6, doesn't give any error for abort,or moving while fetching data; so no need;
+    //cleanup function, and new abortController(), for abort problems;
+
+*route parameters,
+    *import { useParams } from "react-router-dom";
+    *    const { id } = useParams();
+    to fetch something with specific id for routing;
+
+*reusing custom hooks,
+    const { data: blog, error, isPending } = useFetch('http://localhost:8000/blogs/' + id);
+
+*controlled inputs;
+    *Web forms;
+    user can type a blog, & add that, & later we'll send a post request so that it'll add in DB;
+    controlled inputs are way in react to setting up inputs fields in forms, so we can track their values;
+    *usingState
+    const [title, setTitle] = useState('')
+    const [body, setBody] = useState('')
+    const [author, setAuthor] = useState('mario')
+
+*Programmatic Redirects;
+    useHistory,
+    goes back & forward using history;
+    when something is done we Redirect the user to a new route;
+    *import {useNavigate} from "react-router-dom"  
+    *const navigate = useNavigate()  
+    *navigate("/Home", { replace: true });
+
+*Deleting Blogs;
+    const handleClick = () => {
+        fetch('http://localhost:8000/blogs/' + blog.id, {
+            method: 'DELETE'
+        }).then(() => {
+            navigate("/", { replace: true });
+        })
+    }
+
+*404 pages & next...

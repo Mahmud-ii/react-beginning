@@ -1,0 +1,11 @@
+*node -v
+
+*npx create-react-app ., to create the file & installing the dependencies; to get started;
+
+*all main files will be in the source folder;
+
+*npm start, renders project live on web;
+
+*we can remove extra module/components;
+
+*
